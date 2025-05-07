@@ -1,0 +1,7 @@
+debug*.*
+test*.*
+.Rhistory
+.Rproj.user
+.RData
+*.tar.*
+.vscode
