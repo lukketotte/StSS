@@ -1,0 +1,459 @@
+[
+    {
+        "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/CaviGaussian.cpp",
+        "file_last_write": 1746017243.0,
+        "definitions": [
+            {
+                "usr": "c:@S@VIInits",
+                "kind": 3,
+                "parent_name": "",
+                "name": "VIInits",
+                "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/CaviGaussian.cpp",
+                "line": 10,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@q_sigma_beta#&1$@N@arma@S@Mat>#d#S0_#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "q_sigma_beta(const arma::mat &, const arma::mat &, double)",
+                "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/CaviGaussian.cpp",
+                "line": 35,
+                "column": 11,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@q_mu_beta#&1$@N@arma@S@Col>#d#&1$@N@arma@S@Mat>#d#S0_#S2_#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "q_mu_beta(const arma::vec &, const arma::mat &, const arma::vec &, const arma::mat &, double)",
+                "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/CaviGaussian.cpp",
+                "line": 40,
+                "column": 11,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@q_sigma_delta#&1$@N@arma@S@Mat>#d#d#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "q_sigma_delta(const arma::mat &, double, double)",
+                "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/CaviGaussian.cpp",
+                "line": 45,
+                "column": 11,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@q_mu_delta#&1$@N@arma@S@Col>#d#&1$@N@arma@S@Mat>#d#S0_#S2_#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "q_mu_delta(const arma::vec &, const arma::mat &, const arma::vec &, const arma::mat &, double)",
+                "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/CaviGaussian.cpp",
+                "line": 50,
+                "column": 11,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@q_mu_sig_inv#&1$@N@arma@S@Col>#d#&1$@N@arma@S@Mat>#d#S0_#S0_#S2_#S2_#d#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "q_mu_sig_inv(const arma::vec &, const arma::mat &, const arma::vec &, const arma::vec &, const arma::mat &, const arma::mat &, double, double)",
+                "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/CaviGaussian.cpp",
+                "line": 55,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@q_mu_tau#&1$@N@arma@S@Col>#d#&1$@N@arma@S@Mat>#d#S2_#d#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "q_mu_tau(const arma::vec &, const arma::mat &, const arma::mat &, double, double)",
+                "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/CaviGaussian.cpp",
+                "line": 64,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@ELBO#$@N@arma@S@Mat>#d#S0_#$@N@arma@S@Col>#d#S1_#S1_#S0_#S1_#d#S1_#d#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "ELBO(arma::mat, arma::mat, arma::vec, arma::vec, arma::vec, arma::mat, arma::vec, double, arma::vec, double, double)",
+                "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/CaviGaussian.cpp",
+                "line": 71,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@vi_gauss#$@N@arma@S@Col>#d#$@N@arma@S@Mat>#d#S1_#d#d#S0_#I#d#I#d#d#d#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "vi_gauss(arma::vec, arma::mat, arma::mat, double, double, arma::vec, List, double, int, double, double, double, double)",
+                "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/CaviGaussian.cpp",
+                "line": 153,
+                "column": 6,
+                "hidden": false
+            }
+        ],
+        "hidden": false
+    },
+    {
+        "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/CaviPoisson.cpp",
+        "file_last_write": 1746018571.0,
+        "definitions": [
+            {
+                "usr": "c:@F@qW#$@N@arma@S@Mat>#d#$@N@arma@S@Col>#d#S0_#S1_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "qW(arma::mat, arma::vec, arma::mat, arma::vec)",
+                "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/CaviPoisson.cpp",
+                "line": 9,
+                "column": 11,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@qSigma#&1$@N@arma@S@Mat>#d#&1$@N@arma@S@Col>#d#S0_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "qSigma(const arma::mat &, const arma::vec &, const arma::mat &)",
+                "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/CaviPoisson.cpp",
+                "line": 15,
+                "column": 11,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@qMu#&1$@N@arma@S@Col>#d#S0_#&1$@N@arma@S@Mat>#d#S2_#S0_#S2_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "qMu(const arma::vec &, const arma::vec &, const arma::mat &, const arma::mat &, const arma::vec &, const arma::mat &)",
+                "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/CaviPoisson.cpp",
+                "line": 20,
+                "column": 11,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@qSigInv#$@N@arma@S@Col>#d#$@N@arma@S@Mat>#d#d#d#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "qSigInv(arma::vec, arma::mat, double, double, int, int)",
+                "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/CaviPoisson.cpp",
+                "line": 25,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@log_p_y#$@N@arma@S@Col>#d#$@N@arma@S@Mat>#d#S1_#S0_#S0_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "log_p_y(arma::vec, arma::mat, arma::mat, arma::vec, arma::vec)",
+                "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/CaviPoisson.cpp",
+                "line": 33,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@log_p_sigma#$@N@arma@S@Col>#d#$@N@arma@S@Mat>#d#I#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "log_p_sigma(arma::vec, arma::mat, int, double)",
+                "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/CaviPoisson.cpp",
+                "line": 46,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@ELBO#$@N@arma@S@Col>#d#$@N@arma@S@Mat>#d#S0_#S1_#S0_#S0_#S0_#S1_#S0_#d#S0_#S0_#d#d#d#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "ELBO(arma::vec, arma::mat, arma::vec, arma::mat, arma::vec, arma::vec, arma::vec, arma::mat, arma::vec, double, arma::vec, arma::vec, double, double, double, double)",
+                "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/CaviPoisson.cpp",
+                "line": 54,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@vi_poisson#$@N@arma@S@Col>#d#$@N@arma@S@Mat>#d#S0_#d#d#S0_#I#d#I#d#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "vi_poisson(arma::vec, arma::mat, arma::vec, double, double, arma::vec, List, double, int, double, double)",
+                "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/CaviPoisson.cpp",
+                "line": 140,
+                "column": 6,
+                "hidden": false
+            }
+        ],
+        "hidden": false
+    },
+    {
+        "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/helpers.cpp",
+        "file_last_write": 1746018580.0,
+        "definitions": [
+            {
+                "usr": "c:@F@logistic#d#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "logistic(double, double)",
+                "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/helpers.cpp",
+                "line": 11,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@logistic#&1$@N@arma@S@Col>#d#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "logistic(const arma::vec &, double)",
+                "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/helpers.cpp",
+                "line": 15,
+                "column": 11,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@logit#d#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "logit(double, double)",
+                "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/helpers.cpp",
+                "line": 21,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@lambda#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "lambda(double)",
+                "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/helpers.cpp",
+                "line": 26,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@lambda#&1$@N@arma@S@Col>#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "lambda(const arma::vec &)",
+                "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/helpers.cpp",
+                "line": 30,
+                "column": 11,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@exp_normalize#&1$@N@arma@S@Col>#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "exp_normalize(const arma::vec &)",
+                "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/helpers.cpp",
+                "line": 35,
+                "column": 11,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@print_iter_info#I#&1$@N@arma@S@Col>#d#d#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "print_iter_info(int, const arma::vec &, double, double)",
+                "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/helpers.cpp",
+                "line": 41,
+                "column": 6,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@tri_diagonal#I#d#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "tri_diagonal(int, double, double)",
+                "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/helpers.cpp",
+                "line": 54,
+                "column": 11,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@block_diagonal#&1$@N@arma@S@Col>#d#d#d#d#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "block_diagonal(const arma::vec &, double, double, double, int)",
+                "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/helpers.cpp",
+                "line": 63,
+                "column": 11,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@block_diagonal#&1$@N@arma@S@Col>#d#d#d#&1$@N@arma@S@Mat>#d#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "block_diagonal(const arma::vec &, double, double, const arma::mat &, double)",
+                "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/helpers.cpp",
+                "line": 71,
+                "column": 11,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@beta_mat#&1$@N@arma@S@Col>#d#d#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "beta_mat(const arma::vec &, double, double)",
+                "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/helpers.cpp",
+                "line": 82,
+                "column": 11,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@safe_inverse#$@N@arma@S@Mat>#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "safe_inverse(arma::mat)",
+                "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/helpers.cpp",
+                "line": 86,
+                "column": 11,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@safe_log#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "safe_log(double)",
+                "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/helpers.cpp",
+                "line": 108,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@safe_log#&1$@N@arma@S@Col>#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "safe_log(const arma::vec &)",
+                "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/helpers.cpp",
+                "line": 112,
+                "column": 11,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@compute_weight_matrix#&1$@N@arma@S@Mat>#d#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "compute_weight_matrix(const arma::mat &, double)",
+                "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/helpers.cpp",
+                "line": 119,
+                "column": 11,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@xi#$@N@arma@S@Col>#d#$@N@arma@S@Mat>#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "xi(arma::vec, arma::mat)",
+                "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/helpers.cpp",
+                "line": 138,
+                "column": 11,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@cross_term#&1$@N@arma@S@Col>#d#&1$@N@arma@S@Mat>#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "cross_term(const arma::vec &, const arma::mat &)",
+                "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/helpers.cpp",
+                "line": 142,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@hess_q_eta#d#$@N@arma@S@Col>#d#$@N@arma@S@Mat>#d#S0_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "hess_q_eta(double, arma::vec, arma::mat, arma::vec)",
+                "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/helpers.cpp",
+                "line": 147,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@grad_hess_q_eta#d#&1$@N@arma@S@Col>#d#&1$@N@arma@S@Mat>#d#S0_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "grad_hess_q_eta(double, const arma::vec &, const arma::mat &, const arma::vec &)",
+                "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/helpers.cpp",
+                "line": 163,
+                "column": 11,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@nr_update#d#$@N@arma@S@Col>#d#$@N@arma@S@Mat>#d#S0_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "nr_update(double, arma::vec, arma::mat, arma::vec)",
+                "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/helpers.cpp",
+                "line": 177,
+                "column": 11,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@eta_hat#d#$@N@arma@S@Col>#d#$@N@arma@S@Mat>#d#S0_#I#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "eta_hat(double, arma::vec, arma::mat, arma::vec, int, double)",
+                "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/helpers.cpp",
+                "line": 202,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@q_gamma#&1$@N@arma@S@Col>#d#S0_#&1$@N@arma@S@Mat>#d#d#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "q_gamma(const arma::vec &, const arma::vec &, const arma::mat &, double, double)",
+                "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/helpers.cpp",
+                "line": 221,
+                "column": 11,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@mc_sigmoid#d#d#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "mc_sigmoid(double, double, int)",
+                "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/helpers.cpp",
+                "line": 235,
+                "column": 8,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@q_sigma_theta#d#I#$@N@arma@S@Col>#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "q_sigma_theta(double, int, arma::vec)",
+                "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/helpers.cpp",
+                "line": 243,
+                "column": 11,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@q_mu_theta#$@N@arma@S@Col>#d#$@N@arma@S@Mat>#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "q_mu_theta(arma::vec, arma::mat)",
+                "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/helpers.cpp",
+                "line": 250,
+                "column": 11,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@E_elbo_eta#d#d#$@N@arma@S@Col>#d#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "E_elbo_eta(double, double, arma::vec, int)",
+                "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/helpers.cpp",
+                "line": 256,
+                "column": 11,
+                "hidden": false
+            }
+        ],
+        "hidden": false
+    },
+    {
+        "file": "/Users/lukar818/Documents/postdoc/supervision/ruiyang/spatial_multiome_inference/StSS/src/helpers.h",
+        "file_last_write": 1746014625.0,
+        "definitions": [],
+        "hidden": false
+    }
+]

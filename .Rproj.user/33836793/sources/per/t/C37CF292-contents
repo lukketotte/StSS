@@ -1,0 +1,218 @@
+#include <RcppArmadillo.h>
+#include <iomanip>
+#include "helpers.h"
+
+using namespace Rcpp;
+
+// [[Rcpp::depends(RcppArmadillo)]]
+
+arma::mat qW(arma::mat C, arma::vec mu, arma::mat Sigma, arma::vec log_s){
+  arma::mat X = C*Sigma*trans(C);
+  arma::vec exponent = C*mu + 0.5 * X.diag() + log_s;
+  return arma::exp(exponent);
+}
+
+arma::mat qSigma(const arma::mat& C, const arma::vec& w, const arma::mat& Bdiag) {
+  arma::mat M = C.t() * arma::diagmat(w) * C + Bdiag;
+  return safe_inverse(M);
+}
+
+arma::vec qMu(const arma::vec& y, const arma::vec& w, const arma::mat& C, const arma::mat& Bdiag, 
+  const arma::vec& qmu, const arma::mat& qsigma){
+return qmu + qsigma * (C.t() * (y - w) - Bdiag * qmu);
+}
+
+double qSigInv(arma::vec mu, arma::mat Sigma, double b, double a, int n, int p){
+  arma::vec umu = mu.tail_rows(n).eval();
+  arma::mat qsig = Sigma(arma::span(p, n+p-1), arma::span(p,n+p-1));
+  double denom = 0.5*(arma::as_scalar(arma::dot(umu,umu)) + arma::trace(qsig)) + b;
+  return (n*0.5 + a)/denom;
+}
+
+// ELBO
+double log_p_y(arma::vec y, arma::mat C, arma::mat Sigma, arma::vec mu, arma::vec log_s) {
+  // Precompute common terms outside the loop
+  arma::vec diagVec = arma::diagvec(C * Sigma * trans(C)); // Diagonal terms
+  arma::vec Cmu = C * mu; // C * mu, constant for all iterations
+
+  // Vectorize the sum term and compute the log likelihood
+  arma::vec expTerms = exp(Cmu + log_s + 0.5 * diagVec); // Exp term is now a vector
+  double sumTerm = arma::sum(expTerms); // Sum over all terms
+  
+  // Return the result
+  return arma::as_scalar(arma::trans(y) *Cmu) - sumTerm;
+}
+
+double log_p_sigma(arma::vec qMu, arma::mat qSigma, int p, double a) {
+  int n = qMu.n_elem;
+  arma::vec qMuSquared = arma::square(qMu.subvec(p, n-1));
+  arma::vec qSigmaDiag = qSigma(arma::span(p, n-1), arma::span(p, n-1)).diag();
+  double ret = arma::sum(qMuSquared + qSigmaDiag);
+  return -(n - p + a) * std::log(0.5 * ret);
+}
+
+double ELBO(arma::vec y, arma::mat C, arma::vec log_s, arma::mat Sigma, arma::vec mu, arma::vec mu_gamma,
+  arma::vec mu_theta, arma::mat Sigma_theta, arma::vec mc_estimates, double eta_var, arma::vec xi, arma::vec v, 
+  double a, double b, double lambda_0, double lambda_1)
+{
+int p = arma::size(mu_theta)[0];
+double sum_prior_beta = 0;
+double sum_var_beta = 0;
+double xi_i = 0;
+double sum_term_gamma = 0;
+double log_q_gamma = 0;
+double mu_gamma_i = 0;
+double mu_theta_i = 0;
+
+// Precompute lambda and log(lambda) values
+double log_lambda_1 = log(lambda_1);
+double log_lambda_0 = log(lambda_0);
+
+for(unsigned i = 0; i < p; i++){
+  mu_gamma_i = arma::as_scalar(mu_gamma.row(i));
+  mu_theta_i = arma::as_scalar(mu_theta.row(i));
+  xi_i = arma::as_scalar(xi.row(i));
+
+  // p(beta)
+  sum_prior_beta += log_lambda_1 * mu_gamma_i + log_lambda_0 * (1 - mu_gamma_i);
+  sum_var_beta += (Sigma(i,i) + pow(arma::as_scalar(mu.row(i)),2)) * 
+            (mu_gamma_i / lambda_1 + (1 - mu_gamma_i) / lambda_0);
+
+  // p(gamma)
+  sum_term_gamma += mu_theta_i * mu_gamma_i + log(logistic(xi_i, 0));
+  sum_term_gamma -=  0.5 * mu_theta_i - 0.5 * xi_i;
+  sum_term_gamma -= lambda(xi_i) * (Sigma_theta(i,i) + pow(mu_theta_i, 2) - pow(xi_i, 2));
+
+  // q(theta)
+  log_q_gamma += (mu_gamma_i * safe_log(mu_gamma_i) + (1. - mu_gamma_i) * safe_log(1. - mu_gamma_i));
+}
+
+arma::mat Sigma_rho = tri_diagonal(p, arma::as_scalar(mc_estimates.row(2)), 1);
+double sum_term_theta = -0.5 * (arma::trace(Sigma_rho * Sigma_theta) + arma::as_scalar(mu_theta.t() * Sigma_rho * mu_theta));
+
+// Monte Carlo estimates for eta
+
+// Compute the remaining terms
+double elbo = log_p_y(y, C, Sigma, mu, log_s) + log_p_sigma(mu, Sigma, p, a);
+
+// log_p_beta
+elbo -= 0.5 * (sum_var_beta + sum_prior_beta);
+
+//log p_gamma
+elbo += sum_term_gamma;
+
+// log_p_theta
+elbo += sum_term_theta + 0.5 * arma::as_scalar(mc_estimates.row(0));
+
+// log_p_eta
+elbo += arma::as_scalar(mc_estimates.row(3)) - 2 * arma::as_scalar(mc_estimates.row(1)) - arma::as_scalar(mc_estimates.row(2)) * cross_term(mu_theta, Sigma_theta);
+
+// log_q_eta (should be minus)
+elbo -= log_q_gamma;
+
+// Log-determinant terms
+elbo += 0.5 * (log(eta_var) + arma::log_det(Sigma_theta).real() + arma::log_det(Sigma).real());
+
+return elbo;
+}
+
+
+//' Poisson gllm
+//'
+//' Computes mean field variational bayes estimates of poisson GLLM with structured spike and slab priors with p fixed and k random effect coefficients.
+//'
+//' @param y vector. Dependent measurements.
+//' @param C Matrix. Concatenated fixed and random effects model matrices in said order
+//' @param log_s vector. Log offset.
+//' @param lambda_0. Variance of spike distribution
+//' @param lambda_1. Variance of slab distribution
+//' @param v vector. Eigenvectors of tridiagonal pxp matrix with 0s on diagonal and 1 on the off-diagonal
+//' @param inits List. Order is eta, mu_(beta, delta), Sigma_(beta, delta), sig_inv, mu_gamma, mu_theta, t
+//' @param epsilon = 1e-4. ELBO convergence
+//' @param max_iter = 200. Maximum number of iterations
+//' @param a = 1. Hyper parameter of sigma (shape)
+//' @param b = 1. Hyper parameter of sigma (scale)
+//'
+//' @return List of results
+//'
+//' @export
+// [[Rcpp::export]]
+List vi_poisson(arma::vec y, arma::mat C, arma::vec log_s, double lambda_0, double lambda_1, 
+        arma::vec v, List inits, double epsilon = 1e-4, int max_iter = 200, double a = 1.0, double b = 1.0)
+{
+  int N = C.n_cols;
+  int n = y.n_elem;
+  int p = v.n_elem;
+  int k = N-p;
+  // inits
+  arma::vec elbo = arma::zeros(max_iter);
+  double eta = inits[0];
+  arma::mat Sigma_rho = tri_diagonal(p, logistic(eta,-0.5), 1);
+  arma::vec mu = inits[1];
+  arma::mat Sigma = inits[2];
+  double sig_inv = inits[3];
+  arma::vec mu_gamma = inits[4];
+  arma::vec mu_theta = inits[5];
+  arma::vec t = inits[6];
+  arma::mat B = arma::zeros(N,N);
+  arma::vec w = arma::zeros(n);
+  arma::mat Sigma_theta = arma::zeros(p,p);
+  arma::vec mc_estimates = arma::vec({0, 0, logistic(eta,-0.5), 0});
+  double eta_var  = 1;
+  double diff = 0;
+  double temp_elbo = 0;
+  bool flag = true;
+  int iter = 0;
+
+  while(flag && iter < max_iter){
+    if(iter > 0 && iter % 1 == 0){
+      print_iter_info(iter, elbo.row(iter-1), diff, eta);
+    }
+    // update beta, u params with dampening if elbo has decreased at some point
+    w = qW(C, mu, Sigma, log_s);
+    B = block_diagonal(mu_gamma, lambda_0, lambda_1, sig_inv, k);
+    Sigma =  qSigma(C, w, B);//damping ? arma::pow(Sigma, 1-damping_factor) + arma::pow(qSigma(C, w, B), damping_factor) :qSigma(C, w, B);
+    mu = qMu(y, w, C, B, mu, Sigma);// damping ? arma::pow(mu, 1-damping_factor) + arma::pow(qMu(y, w, C, B, mu, Sigma), damping_factor): qMu(y, w, C, B, mu, Sigma);
+    sig_inv = qSigInv(mu, Sigma, a, b, k, p);
+
+    // update mu_gamma
+    mu_gamma = q_gamma(mu_theta, mu, Sigma, lambda_0, lambda_1);
+
+    // update theta params
+    Sigma_theta = q_sigma_theta(arma::as_scalar(mc_estimates.row(2)), p, t);
+    mu_theta = q_mu_theta(mu_gamma, Sigma_theta);
+    t = xi(mu_theta, Sigma_theta);
+
+    //update eta
+    eta = eta_hat(eta, mu_theta, Sigma_theta, v, 20, 1e-6);
+    eta_var = -1/hess_q_eta(eta, mu_theta, Sigma_theta, v);
+
+ 
+    temp_elbo = ELBO(y, C, log_s, Sigma,mu,mu_gamma,mu_theta,Sigma_theta,
+      mc_estimates,eta_var, t, v, a, b, lambda_0, lambda_1);
+    
+    if(isnan(temp_elbo) || isinf(temp_elbo)){
+      if(iter > 3){
+        throw std::invalid_argument("ELBO is nan/inf, try different initial values");
+      }
+    }
+
+    elbo.row(iter).fill(temp_elbo);
+
+    if(iter > 1){
+      diff = arma::as_scalar(elbo.row(iter)) - arma::as_scalar(elbo.row(iter-1));
+      if(iter > 5 && sqrt(pow(diff,2)) < epsilon){
+        flag = false;
+      }
+    }
+    iter += 1;
+  }
+  
+  List L = List::create(_["elbo"] = elbo.head_rows(iter), 
+    _["eta"] = eta, _["eta_var"] = eta_var, _["mu"] = mu, 
+    _["Sigma"] = Sigma, _["mu_gamma"] = mu_gamma, _["sig_inv"] = sig_inv,
+    _["mu_theta"] = mu_theta, _["Sigma_theta"] = Sigma_theta,
+    _["t"] = t);
+    
+  return L;
+}
