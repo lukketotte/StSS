@@ -8,5 +8,5 @@ Description: LLM and GLLM variational inference with structured spike and slab p
 License: GPL (>= 2)
 Encoding: UTF-8
 RoxygenNote: 7.3.2
-Imports: Rcpp (>= 1.0.14)
+Imports: Rcpp (>= 1.0.11)
 LinkingTo: Rcpp, RcppArmadillo
