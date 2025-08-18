@@ -205,7 +205,7 @@ List vi_gauss(arma::vec y, arma::mat X, arma::mat A, double lambda_0, double lam
     temp_elbo = ELBO(X,Sigma_beta,mu_beta,mu_gamma,mu_theta,Sigma_theta,mc_estimates, 
       eta_var,t,lambda_0,lambda_1);
 
-    if(isnan(temp_elbo) || isinf(temp_elbo)){
+    if(std::isnan(temp_elbo) || std::isinf(temp_elbo)){
       throw std::invalid_argument("ELBO is nan/inf, try different initial values");
     }
 

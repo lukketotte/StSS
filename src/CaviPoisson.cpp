@@ -191,7 +191,7 @@ List vi_poisson(arma::vec y, arma::mat C, arma::vec log_s, double lambda_0, doub
     temp_elbo = ELBO(y, C, log_s, Sigma,mu,mu_gamma,mu_theta,Sigma_theta,
       mc_estimates,eta_var, t, v, a, b, lambda_0, lambda_1);
     
-    if(isnan(temp_elbo) || isinf(temp_elbo)){
+    if(std::isnan(temp_elbo) || std::isinf(temp_elbo)){
       if(iter > 3){
         throw std::invalid_argument("ELBO is nan/inf, try different initial values");
       }
